@@ -9,7 +9,6 @@ import ItemModal from "../ItemModal/ItemModal";
 import { getForecastWeather, parseWeatherData } from "../../utils/weatherApi";
 
 function App() {
-  const weatherTemp = 45;
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [temp, setTemp] = useState(0);
@@ -30,11 +29,9 @@ function App() {
   useEffect(() => {
     getForecastWeather().then((data) => {
       const temperature = parseWeatherData(data);
-      console.log(temperature);
       setTemp(temperature);
     });
   }, []);
-  console.log(temp);
 
   return (
     <div>
