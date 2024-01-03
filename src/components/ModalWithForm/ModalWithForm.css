@@ -17,7 +17,6 @@
   height: 435px;
   width: 100%;
   border-radius: 20px;
-  /* padding: 34px 36px; */
 }
 
 .modal__header {
@@ -65,4 +64,64 @@
   color: rgba(255, 255, 255, 1);
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.6);
+}
+
+.input__header {
+  font-family: "CabinetGrotesk-Medium", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  font-size: 16px;
+  padding: 0;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.input {
+  font-family: "CabinetGrotesk-Medium", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  font-size: 16px;
+  padding: 0;
+  color: rgba(0, 0, 0, 1);
+  width: 440px;
+  border: none;
+  border-bottom: 1px solid;
+  margin-bottom: 24px;
+}
+
+.input__type-header {
+  margin-bottom: 0;
+  font-family: "CabinetGrotesk-Medium", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  font-size: 16px;
+}
+
+.weather__inputs {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  font-family: "CabinetGrotesk-Medium", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  font-size: 16px;
+}
+
+.weather__inputs:last-of-type {
+  margin-bottom: 32px;
+}
+
+.weather__type-radio {
+  accent-color: #000;
+}
+
+.weather__type-radio:checked ~ label {
+  color: #000;
+}
+
+.radio__button-label {
+  color: rgba(0, 0, 0, 0.5);
 }
