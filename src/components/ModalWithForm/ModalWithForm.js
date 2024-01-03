@@ -21,7 +21,6 @@ const ModalWithForm = ({
         <form className="modal__form">
           {children}
           <button className="modal__form-submit" type="submit">
-            {" "}
             {buttonText}
           </button>
         </form>
