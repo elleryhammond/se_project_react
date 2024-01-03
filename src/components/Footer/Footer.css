@@ -2,12 +2,11 @@
   font-family: "CabinetGrotesk-Medium", Arial, sans-serif;
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
-  padding: 0 20px;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
   padding: 0 40px;
   margin-top: 170px;
+  color: #000;
 }

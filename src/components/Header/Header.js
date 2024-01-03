@@ -26,7 +26,7 @@ const Header = ({ onCreateModal }) => {
         </div>
         <div className="header__username">Terrence Tegegne</div>
         <div>
-          <img src={require("../../images/avatar.svg").default} alt="Avatar" />
+          <img src={require("../../images/avatar.svg").default} alt="avatar" />
         </div>
       </div>
     </header>
