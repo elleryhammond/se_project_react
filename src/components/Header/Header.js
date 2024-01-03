@@ -24,7 +24,7 @@ const Header = ({ onCreateModal }) => {
             + Add clothes
           </button>
         </div>
-        <div className="avatar__name">Terrence Tegegne</div>
+        <div className="header__username">Terrence Tegegne</div>
         <div>
           <img src={require("../../images/avatar.svg").default} alt="Avatar" />
         </div>
