@@ -21,6 +21,28 @@ function App() {
     setActiveModal("");
   };
 
+  useEffect(() => {
+    if (!activeModal) return;
+    const handleEscClose = (event) => {
+      if (event.key === "Escape") {
+        handleCloseModal();
+      }
+    };
+    document.addEventListener("keydown", handleEscClose);
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [activeModal]);
+
+  // function handleRemoteClick(event) {
+  //   if (event && event?.target) {
+  //     console.log(event?.target.classList.contains("modal"));
+  //   }
+  // }
+  // useEffect(() => {
+  //   document.addEventListener("click", handleRemoteClick);
+  // }, []);
+
   const handleSelectedCard = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
