@@ -12,7 +12,7 @@ const Header = ({ onCreateModal }) => {
         <div>
           <img src={require("../../images/wtwrlogo.svg").default} alt="Logo" />
         </div>
-        <div className="header__date">{currentDate}</div>
+        <div className="header__date">{currentDate}, Portland</div>
       </div>
       <div className="header__avatar-logo">
         <div>
