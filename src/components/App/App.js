@@ -12,6 +12,7 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [temp, setTemp] = useState(0);
+  const [city, setCity] = useState("");
 
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -49,16 +50,24 @@ function App() {
   };
 
   useEffect(() => {
-    getForecastWeather().then((data) => {
-      const temperature = parseWeatherData(data);
-      setTemp(temperature);
-    });
+    getForecastWeather()
+      .then((data) => {
+        const temperature = parseWeatherData(data);
+        setTemp(temperature);
+        setCity(data);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   return (
     <div>
       <Header onCreateModal={handleCreateModal} />
-      <Main weatherTemp={temp} onSelectCard={handleSelectedCard} temp={temp} />
+      <Main
+        weatherTemp={temp}
+        onSelectCard={handleSelectedCard}
+        city={city}
+        temp={temp}
+      />
       <Footer />
       {activeModal === "create" && (
         <ModalWithForm title="New garmet" onClose={handleCloseModal}>
@@ -87,31 +96,40 @@ function App() {
           <p className="input__type-header">Select the weather type:</p>
           <div>
             <div className="weather__inputs">
-              <input
-                className="weather__type-radio"
-                type="radio"
-                id="hot"
-                value="hot"
-              />
-              <label className="radio__button-label"> Hot</label>
+              <label className="radio__button-label">
+                <input
+                  className="weather__type-radio"
+                  type="radio"
+                  id="hot"
+                  value="hot"
+                  name="weatherType"
+                />
+                Hot
+              </label>
             </div>
             <div className="weather__inputs">
-              <input
-                className="weather__type-radio"
-                type="radio"
-                id="warm"
-                value="warm"
-              />
-              <label className="radio__button-label"> Warm</label>
+              <label className="radio__button-label">
+                <input
+                  className="weather__type-radio"
+                  type="radio"
+                  id="warm"
+                  value="warm"
+                  name="weatherType"
+                />
+                Warm
+              </label>
             </div>
             <div className="weather__inputs">
-              <input
-                className="weather__type-radio"
-                type="radio"
-                id="cold"
-                value="cold"
-              />
-              <label className="radio__button-label"> Cold</label>
+              <label className="radio__button-label">
+                <input
+                  className="weather__type-radio"
+                  type="radio"
+                  id="cold"
+                  value="cold"
+                  name="weatherType"
+                />
+                Cold
+              </label>
             </div>
           </div>
         </ModalWithForm>

@@ -116,6 +116,7 @@
 
 .weather__type-radio {
   accent-color: #000;
+  margin-right: 5px;
 }
 
 .weather__type-radio:checked ~ label {
