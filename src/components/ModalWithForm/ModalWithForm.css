@@ -119,10 +119,10 @@
   margin-right: 5px;
 }
 
-.weather__type-radio:checked ~ label {
-  color: #000;
-}
-
 .radio__button-label {
   color: rgba(0, 0, 0, 0.5);
+}
+
+.radio__button-label:has(input:checked) {
+  color: #000;
 }

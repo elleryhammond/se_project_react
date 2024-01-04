@@ -35,15 +35,6 @@ function App() {
     };
   }, [activeModal]);
 
-  // function handleRemoteClick(event) {
-  //   if (event && event?.target) {
-  //     console.log(event?.target.classList.contains("modal"));
-  //   }
-  // }
-  // useEffect(() => {
-  //   document.addEventListener("click", handleRemoteClick);
-  // }, []);
-
   const handleSelectedCard = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
@@ -52,22 +43,17 @@ function App() {
   useEffect(() => {
     getForecastWeather()
       .then((data) => {
+        setCity(data.name);
         const temperature = parseWeatherData(data);
         setTemp(temperature);
-        setCity(data);
       })
       .catch((err) => console.log(err));
   }, []);
 
   return (
     <div>
-      <Header onCreateModal={handleCreateModal} />
-      <Main
-        weatherTemp={temp}
-        onSelectCard={handleSelectedCard}
-        city={city}
-        temp={temp}
-      />
+      <Header onCreateModal={handleCreateModal} city={city} temp={temp} />
+      <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
       <Footer />
       {activeModal === "create" && (
         <ModalWithForm title="New garmet" onClose={handleCloseModal}>
