@@ -1,0 +1,13 @@
+.profile__sidebar {
+  display: flex;
+  font-family: "CabinetGrotesk-Medium", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  margin: 0 0 0 20px;
+  gap: 15px;
+}
+
+.profile__username {
+  align-self: center;
+}
