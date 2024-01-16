@@ -1,9 +1,11 @@
 .card__image {
   max-width: 328px;
-  width: 100%;
+  /* width: 100%; */
+  width: 328px;
   height: 328px;
   border-radius: 20px;
   cursor: pointer;
+  object-fit: fill;
 }
 
 .card__name {
@@ -35,4 +37,5 @@
   gap: 20px;
   justify-content: flex-start;
   margin-top: 20px;
+  row-gap: 0px;
 }

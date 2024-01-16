@@ -1,5 +1,5 @@
 .modal {
-  font-family: "CabinetGrotesk-Medium", Arial, sans-serif;
+  font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
@@ -36,15 +36,45 @@
   height: 500px;
   display: flex;
   border-radius: 16px;
+  width: 100%;
+}
+
+.modal__info {
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+  margin-left: 5px;
 }
 
 .modal__item-description {
   margin-top: 20px;
   margin-left: 32px;
-  margin-bottom: 12px;
+  /* margin-bottom: 12px; */
 }
 
 .modal__weather-description {
   margin-left: 32px;
+  margin-top: 60px;
   margin-bottom: 32px;
+  position: absolute;
+}
+
+.modal__item-delete-button {
+  border: none;
+  color: #ff4d00;
+  background-color: #fff;
+  font-family: "CabinetGrotesk-Medium", Arial, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  padding: 0;
+  max-height: 24px;
+  margin-right: 32px;
+  margin-top: 20px;
+}
+
+.modal__item-delete-button:hover {
+  cursor: pointer;
+  color: lightsalmon;
 }

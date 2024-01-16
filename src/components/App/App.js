@@ -19,7 +19,7 @@ function App() {
   const [temp, setTemp] = useState(0);
   const [city, setCity] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
-  const [clothingItems, setClothingItems] = useState("");
+  const [clothingItems, setClothingItems] = useState([]);
 
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -40,11 +40,11 @@ function App() {
       : setCurrentTemperatureUnit("F");
   };
 
-  const handleDeleteCard = (card) => {
-    deleteItems(card.id)
+  const handleDeleteCard = (_id) => {
+    deleteItems(_id)
       .then(() => {
         const updatedItems = clothingItems.filter((item) => {
-          return item.id !== card.id;
+          return item._id !== _id;
         });
         setClothingItems(updatedItems);
         handleCloseModal();
@@ -125,7 +125,7 @@ function App() {
           <ItemModal
             selectedCard={selectedCard}
             onClose={handleCloseModal}
-            onClick={handleDeleteCard}
+            onDelete={handleDeleteCard}
           />
         )}
       </CurrentTemperatureUnitContext.Provider>

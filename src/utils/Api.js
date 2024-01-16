@@ -26,8 +26,8 @@ export function postItems(item) {
   }).then(processServerResponse);
 }
 
-export function deleteItems(id) {
-  return fetch(`${baseUrl}/items/${id}`, {
+export function deleteItems(_id) {
+  return fetch(`${baseUrl}/items/${_id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

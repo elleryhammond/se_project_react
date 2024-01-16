@@ -5,16 +5,14 @@ import "./Profile.css";
 
 const Profile = ({ onCreate, clothingItems, onSelectCard }) => {
   return (
-    <section className="profile">
-      <div className="profile__sidebar">
-        <SideBar />
-      </div>
+    <div className="profile">
+      <SideBar />
       <ClothesSection
         clothingItems={clothingItems}
         onSelectCard={onSelectCard}
         onCreate={onCreate}
       />
-    </section>
+    </div>
   );
 };
 

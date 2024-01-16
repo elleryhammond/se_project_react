@@ -5,19 +5,19 @@ import ItemCard from "../ItemCard/ItemCard";
 const ClothesSection = ({ onSelectCard, clothingItems, onCreate }) => {
   return (
     <div className="clothes__section">
-      <div className="profile__heading">
-        <h2 className="profile__title">
+      <div className="clothes__container">
+        <h2 className="clothes__section-text">
           Your clothing items
           <button
-            className="profile__add-button"
+            className="clothes__add-button"
             onClick={onCreate}
             type="button"
           >
-            +Add New
+            + Add New
           </button>
         </h2>
       </div>
-      <div className="profile__section-cards">
+      <div className="clothes__section-cards">
         {clothingItems.map((item) => {
           return (
             <ItemCard item={item} key={item._id} onSelectCard={onSelectCard} />

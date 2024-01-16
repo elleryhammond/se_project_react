@@ -1,10 +1,10 @@
 .profile {
   display: flex;
   align-items: flex-start;
-  gap: 25px;
-  /* padding: 32px 40px 0; */
+  gap: 120px;
+  padding: 0 40px 0;
   font-family: "CabinetGrotesk-Medium", Arial, sans-serif;
-  color: #000;
+  color: 000;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
