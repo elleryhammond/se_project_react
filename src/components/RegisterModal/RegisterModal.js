@@ -1,13 +1,7 @@
 import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const RegisterModal = ({
-  handleCloseModal,
-  onRegistration,
-  onAltClick,
-  isOpen,
-  isLoading,
-}) => {
+const RegisterModal = ({ handleCloseModal, onSignUp, onAltClick, isOpen }) => {
   const [name, setName] = useState("");
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -30,7 +24,7 @@ const RegisterModal = ({
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onRegistration({ email, password, name, avatar: link });
+    onSignUp({ email, password, name, avatar: link });
   };
 
   const handleAltClick = (event) => {
@@ -42,20 +36,19 @@ const RegisterModal = ({
     <ModalWithForm
       title="Sign Up"
       buttonText="Sign Up"
-      name="register"
       onClose={handleCloseModal}
-      onRegistration={onRegistration}
       isOpen={isOpen}
       onSubmit={handleSubmit}
       handleAltClick={handleAltClick}
-      isLoading={isLoading}
+      alternativeText="or Log In"
     >
-      <label>
+      <label className="input__header" htmlFor="email">
         Email*
         <input
-          className="modal__input"
+          className="input"
           type="email"
           name="email"
+          id="email"
           minLength="1"
           maxLength="30"
           placeholder="Email"
@@ -64,26 +57,28 @@ const RegisterModal = ({
           onChange={handleEmailChange}
         />
       </label>
-      <label>
+      <label className="input__header" htmlFor="password">
         Password*
         <input
-          className="modal__input"
+          className="input"
           type="password"
           name="password"
+          id="password"
           minLength="8"
           maxLength="30"
-          placeholder="Email"
+          placeholder="Password"
           value={password}
           required
           onChange={handlePasswordChange}
         />
       </label>
-      <label>
+      <label className="input__header" htmlFor="name">
         Name*
         <input
-          className="modal__input"
+          className="input"
           type="name"
           name="name"
+          id="name"
           minLength="2"
           maxLength="30"
           placeholder="Name"
@@ -92,12 +87,13 @@ const RegisterModal = ({
           onChange={handleNameChange}
         />
       </label>
-      <label>
+      <label className="input__header" htmlFor="url">
         Avatar URL*
         <input
-          className="modal__input"
+          className="input"
           type="url"
-          name="link"
+          name="url"
+          id="url"
           placeholder="Avatar URL"
           value={link}
           required
