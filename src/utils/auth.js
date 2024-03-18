@@ -1,7 +1,7 @@
 import { baseUrl } from "../utils/Api";
 import { processServerResponse } from "../utils/Api";
 
-export const registration = (name, avatar, email, password) => {
+export const signUp = ({ name, avatar, email, password }) => {
   return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
@@ -11,7 +11,7 @@ export const registration = (name, avatar, email, password) => {
   }).then(processServerResponse);
 };
 
-export const authorization = (email, password) => {
+export const signIn = ({ email, password }) => {
   return fetch(`${baseUrl}/signin`, {
     method: "POST",
     headers: {
