@@ -16,8 +16,7 @@ import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperature
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { Switch, Route } from "react-router-dom";
 import { getItems, postItems, deleteItems } from "../../utils/Api";
-
-import * as auth from "../../utils/auth";
+import { signUp, signIn, checkToken } from "../../utils/auth";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -87,58 +86,79 @@ function App() {
       .finally(() => setIsLoading(false));
   };
 
-  function handleRegistration({ email, password, name, avatar }) {
+  //WIP
+  const onSignIn = (values) => {
     setIsLoading(true);
-    auth
-      .registration(email, password, name, avatar)
+    signIn(values)
       .then((res) => {
-        if (res) {
-          localStorage.setItem("jwt", res.token);
-          auth
-            .checkToken(res.token)
-            .then((data) => {
-              setCurrentUser(data);
-            })
-            .finally(() => {
-              setIsLoading(false);
-            })
-            .catch((err) => {
-              console.error(err);
-            });
-        }
-        handleLoginModal();
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }
-
-  function handleLogin({ email, password }) {
-    setIsLoading(true);
-    auth
-      .authorization(email, password)
-      .then((res) => {
-        if (res) {
-          localStorage.setItem("jwt", res.token);
-          auth.checkToken(res.token).then((data) => {
-            setCurrentUser(data.data);
-            setIsLoggedIn(true);
-          });
-        }
+        localStorage.setItem("jwt", res.token);
+        checkToken(res.token);
+        setIsLoggedIn(true);
         handleCloseModal();
       })
       .catch((err) => {
-        console.error("Login failed", err);
+        console.log(err);
       })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }
+      .finally(() => setIsLoading(false));
+  };
 
-  function handleAltModal(alt) {
-    handleCloseModal();
-    setActiveModal(alt);
-  }
+  const onSignUp = (values) => {
+    setIsLoading(true);
+  };
+
+  // }
+  // function onLogin({ email, password }) {
+  //   setIsLoading(true);
+  //   auth
+  //     .authorization(email, password)
+  //     .then((res) => {
+  //       if (res) {
+  //         localStorage.setItem("jwt", res.token);
+  //         auth.checkToken(res.token).then((data) => {
+  //           setCurrentUser(data.data);
+  //           setIsLoggedIn(true);
+  //         });
+  //       }
+  //       handleCloseModal();
+  //     })
+  //     .catch((err) => {
+  //       console.error("Login failed", err);
+  //     })
+  //     .finally(() => {
+  //       setIsLoading(false);
+  //     });
+  // }
+
+  // function onSignup({ email, password, name, avatar }) {
+  //   setIsLoading(true);
+  //   auth
+  //     .registration(email, password, name, avatar)
+  //     .then((res) => {
+  //       if (res) {
+  //         localStorage.setItem("jwt", res.token);
+  //         auth
+  //           .checkToken(res.token)
+  //           .then((data) => {
+  //             setCurrentUser(data);
+  //           })
+  //           .finally(() => {
+  //             setIsLoading(false);
+  //           })
+  //           .catch((err) => {
+  //             console.error(err);
+  //           });
+  //       }
+  //       handleLoginModal();
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // }
+
+  // function handleAltModal(alt) {
+  //   handleCloseModal();
+  //   setActiveModal(alt);
+  // }
 
   useEffect(() => {
     getForecastWeather()
@@ -170,20 +190,17 @@ function App() {
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      localStorage.setItem("jwt", jwt);
-      auth
-        .checkToken(jwt)
-        .then((res) => {
-          if (res && res.data) {
-            setIsLoggedIn(true);
-            setCurrentUser(res.data);
-          }
+      setToken(jwt);
+      checkToken(jwt)
+        .then((data) => {
+          setCurrentUser(data);
+          setIsLoggedIn(true);
         })
         .catch((error) => {
           console.log(error);
         });
     }
-  }, []);
+  }, [token]);
 
   return (
     <CurrentUserContext.Provider value={{ currentUser }}>
@@ -195,8 +212,8 @@ function App() {
             onCreateModal={handleCreateModal}
             city={city}
             temp={temp}
-            handleRegisterModal={handleRegisterModal}
-            handleLoginModal={handleLoginModal}
+            onSignUp={handleRegisterModal}
+            onLogin={handleLoginModal}
             isLoggedIn={isLoggedIn}
           />
           <Switch>
@@ -223,20 +240,20 @@ function App() {
           {activeModal === "register" && (
             <RegisterModal
               isOpen={activeModal === "register"}
-              isLoading={isLoading}
-              onRegistration={handleRegistration}
+              buttonText={!isLoading ? "Sign in" : "Signing in..."}
+              onSignUp={onSignUp}
               handleCloseModal={handleCloseModal}
-              onAltClick={handleAltModal}
+              // onAltClick={handleAltModal}
             />
           )}
 
           {activeModal === "login" && (
             <LoginModal
               handleCloseModal={handleCloseModal}
-              onAltClick={handleAltModal}
+              onSignIn={onSignIn}
+              // onAltClick={handleAltModal}
               isOpen={activeModal === "login"}
-              onLogin={handleLogin}
-              isLoading={isLoading}
+              buttonText={!isLoading ? "Log in" : "Logging in..."}
             />
           )}
 
