@@ -41,6 +41,7 @@ const AddItemModal = ({ handleCloseModal, onAddItem, isOpen }) => {
           placeholder="Name"
           value={name}
           onChange={handleNameChange}
+          required
         />
       </label>
       <label className="input__header" htmlFor="url">
