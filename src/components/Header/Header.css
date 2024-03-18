@@ -19,13 +19,13 @@
   align-items: center;
 }
 
-.header__avatar-logo {
+.header__container {
   display: flex;
   gap: 20px;
   align-items: center;
 }
 
-.header__button {
+.header__clothes-button {
   border: none;
   background: none;
   color: #000;
@@ -38,7 +38,7 @@
   cursor: pointer;
 }
 
-.header__button:hover {
+.header__clothes-button:hover {
   color: darkgrey;
 }
 
@@ -58,4 +58,31 @@
 
 .header__username:hover {
   color: darkgrey;
+}
+
+.header__button {
+  border: none;
+  background: none;
+  color: #000;
+  font-family: "CabinetGrotesk-Medium", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  font-size: 20px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.header__button:visited {
+  color: #000;
+}
+
+.header__button:hover {
+  color: darkgrey;
+}
+
+.header__avatar-login {
+}
+
+login__button {
 }

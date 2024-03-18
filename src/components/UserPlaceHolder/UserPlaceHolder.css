@@ -1,0 +1,17 @@
+.user__placeholder {
+  display: inline-block;
+}
+
+.placeholder__image {
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: 20px;
+  font-family: "CabinetGrotesk-Medium", Arial, sans-serif;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid #000000;
+  border-radius: 50%;
+}
