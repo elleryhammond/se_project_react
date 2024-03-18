@@ -1,26 +1,20 @@
 import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const LoginModal = ({
-  onAltClick,
-  onLogin,
-  handleCloseModal,
-  isLoading,
-  isOpen,
-}) => {
+const LoginModal = ({ handleCloseModal, onSignIn, isOpen, onAltClick }) => {
   const [email, setEmail] = useState("");
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
   };
 
   const [password, setPassword] = useState("");
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onLogin({ email, password });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSignIn({ email, password });
   };
 
   const handleAltClick = (event) => {
@@ -31,21 +25,20 @@ const LoginModal = ({
   return (
     <ModalWithForm
       title="Log In"
-      buttonText="Log In"
-      name="login"
       onClose={handleCloseModal}
-      onLogin={onLogin}
-      onSubmit={handleSubmit}
-      isLoading={isLoading}
-      handleAltClick={handleAltClick}
       isOpen={isOpen}
+      buttonText="Log In"
+      onSubmit={handleSubmit}
+      handleAltClick={handleAltClick}
+      alternativeText="or Sign Up"
     >
-      <label>
+      <label className="input__header" htmlFor="email">
         Email
         <input
-          className="modal__input"
+          className="input"
           type="email"
           name="email"
+          id="email"
           minLength="1"
           maxLength="30"
           placeholder="Email"
@@ -54,15 +47,16 @@ const LoginModal = ({
           onChange={handleEmailChange}
         />
       </label>
-      <label>
+      <label className="input__header" htmlFor="password">
         Password
         <input
-          className="modal__input"
+          className="input"
           type="password"
           name="password"
+          id="password"
           minLength="8"
           maxLength="30"
-          placeholder="Email"
+          placeholder="Password"
           value={password}
           required
           onChange={handlePasswordChange}
