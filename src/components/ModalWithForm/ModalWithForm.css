@@ -66,6 +66,27 @@
   background-color: rgba(0, 0, 0, 0.6);
 }
 
+.modal__button-container {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  margin: 0 auto;
+}
+
+.modal__alt_click-button {
+  color: rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+  padding-left: 15px;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  font-family: "CabinetGrotesk-Medium", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  font-size: 16px;
+}
+
 .input__header {
   font-family: "CabinetGrotesk-Medium", Arial, sans-serif;
   font-style: normal;
