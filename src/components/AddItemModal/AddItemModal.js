@@ -55,6 +55,7 @@ const AddItemModal = ({ handleCloseModal, onAddItem, isOpen }) => {
           placeholder="Image URL"
           value={imageUrl}
           onChange={handleUrlChange}
+          required
         />
       </label>
       <p className="input__type-header">Select the weather type:</p>
