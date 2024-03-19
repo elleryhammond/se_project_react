@@ -3,29 +3,43 @@ import ItemCard from "../ItemCard/ItemCard";
 import "./Main.css";
 import React, { useMemo, useContext } from "react";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
+// import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function Main({ weatherTemp, onSelectCard, clothingItems }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
-  const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 999;
-  const tempF = currentTemperatureUnit === "F" ? temp : temp * 1.8 + 32;
+  // const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 999;
+  // const tempF = currentTemperatureUnit === "F" ? temp : temp * 1.8 + 32;
 
+  // const weatherType = useMemo(() => {
+  //   if (tempF >= 86) {
+  //     return "hot";
+  //   } else if (tempF >= 66 && tempF <= 85) {
+  //     return "warm";
+  //   } else if (tempF <= 65) {
+  //     return "cold";
+  //   }
+  // }, [weatherTemp]);
+
+  //Refactor to fix dev dependency issue
+  const temp = currentTemperatureUnit === "°C" ? weatherTemp.C : weatherTemp.F;
   const weatherType = useMemo(() => {
-    if (tempF >= 86) {
+    let hot = 80;
+    let warm = 66;
+
+    const tempF = weatherTemp.F;
+
+    if (tempF > hot) {
       return "hot";
-    } else if (tempF >= 66 && tempF <= 85) {
+    } else if (tempF >= warm && tempF <= hot) {
       return "warm";
-    } else if (tempF <= 65) {
+    } else if (tempF <= warm) {
       return "cold";
     }
   }, [weatherTemp]);
 
-  // const filteredCards = clothingItems.filter((item) => {
-  //   return item.weather.toLowerCase() === weatherType;
-  // });
-
-  const filteredCards = Array.isArray(clothingItems)
-    ? clothingItems.filter((item) => item.weather.toLowerCase() === weatherType)
-    : [];
+  const filteredCards = clothingItems.filter((item) => {
+    return item.weather.toLowerCase() === weatherType;
+  });
 
   return (
     <main className="main">

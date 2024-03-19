@@ -16,7 +16,21 @@ export function getItems() {
   }).then(processServerResponse);
 }
 
-export function postItems(item) {
+// export function postItems(item) {
+//   const token = localStorage.getItem("jwt");
+
+//   return fetch(`${baseUrl}/items`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//       authorization: `Bearer ${token}`,
+//       Accept: "application/json",
+//     },
+//     body: JSON.stringify(item),
+//   }).then(processServerResponse);
+// }
+
+export function postItems({ name, imageUrl, weather }) {
   const token = localStorage.getItem("jwt");
 
   return fetch(`${baseUrl}/items`, {
@@ -24,9 +38,13 @@ export function postItems(item) {
     headers: {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
-      Accept: "application/json",
+      // Accept: "application/json",
     },
-    body: JSON.stringify(item),
+    body: JSON.stringify({
+      name: name,
+      imageUrl: imageUrl,
+      weather: weather,
+    }),
   }).then(processServerResponse);
 }
 
