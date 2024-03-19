@@ -7,82 +7,69 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useContext } from "react";
 import UserPlaceHolder from "../UserPlaceHolder/UserPlaceHolder";
 
-const Header = ({ onCreateModal, city, onSignUp, onLogin }) => {
+const Header = ({ onCreateModal, city, onSignUp, onLogin, isLoggedIn }) => {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
   });
 
-  const { currentUser, loggedIn } = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
 
   return (
     <header className="header">
       <div className="header__logo">
         <div>
           <Link to="/">
-            <img src={logo} alt="What To Wear Logo" />
+            <img src={logo} alt="logo" />
           </Link>
         </div>
         <div>
-          <div className="header__date">
-            {currentDate}, {city}
-          </div>
+          {currentDate}, {city}
         </div>
       </div>
 
       <div className="header__container">
         <ToggleSwitch />
-
-        {loggedIn && (
-          <div>
+        <div>
+          {isLoggedIn ? (
             <button
               className="header__clothes-button"
-              type="text"
+              type="button"
               onClick={onCreateModal}
             >
               + Add clothes
             </button>
-          </div>
+          ) : (
+            <></>
+          )}
+        </div>
+        {isLoggedIn ? (
+          <p to="/profile" className="header__username">
+            {currentUser.name}
+          </p>
+        ) : (
+          <Link to="/register" onClick={onSignUp} className="header__signin">
+            Sign Up
+          </Link>
         )}
 
-        {loggedIn ? (
-          currentUser && currentUser.name ? (
-            <Link to="/profile" className="header__username">
-              {currentUser.name}
-            </Link>
-          ) : (
-            <div>Welcome</div>
-          )
-        ) : (
-          <div>
-            <button className="header__button" type="button" onClick={onSignUp}>
-              Sign Up
-            </button>
-          </div>
-        )}
         <div>
-          {loggedIn ? (
-            currentUser && currentUser.avatar ? (
+          {isLoggedIn ? (
+            currentUser.avatar ? (
               <Link to="/profile">
                 <img
                   src={currentUser.avatar}
-                  className="header__avatar-login"
+                  className="header__avatar"
                   alt="avatar"
                 />
               </Link>
             ) : (
-              <div>
-                {currentUser ? (
-                  <UserPlaceHolder userName={currentUser.name} />
-                ) : null}
-              </div>
+              <UserPlaceHolder isLoggedIn={isLoggedIn} />
             )
           ) : (
-            <div>
-              <button className="header__button" onClick={onLogin}>
-                Log In
-              </button>
-            </div>
+            <Link to="/login" onClick={onLogin} className="header__signin">
+              Log in
+            </Link>
           )}
         </div>
       </div>
