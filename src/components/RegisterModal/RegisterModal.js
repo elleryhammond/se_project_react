@@ -87,13 +87,13 @@ const RegisterModal = ({ handleCloseModal, onSignUp, onAltClick, isOpen }) => {
           onChange={handleNameChange}
         />
       </label>
-      <label className="input__header" htmlFor="url">
+      <label className="input__header">
         Avatar URL*
         <input
           className="input"
           type="url"
-          name="url"
-          id="url"
+          name="avatar"
+          // id="link"
           placeholder="Avatar URL"
           value={link}
           required
