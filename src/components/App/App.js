@@ -66,20 +66,11 @@ function App() {
       : setCurrentTemperatureUnit("F");
   };
 
-  // const handleDeleteCard = (_id) => {
-  //   setIsLoading(true);
-  //   deleteItems(_id)
-  //     .then(() => {
-  //       const updatedItems = clothingItems.filter((item) => {
-  //         return item._id !== _id;
-  //       });
-  //       setClothingItems(updatedItems);
-  //       handleCloseModal();
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     })
-  //     .finally(() => setIsLoading(false));
+  // const handleSignOut = () => {
+  //   localStorage.removeItem("jwt");
+  //   setCurrentUser({});
+  //   setIsLoggedIn(false);
+  //   history.pushState("/");
   // };
 
   const handleDeleteCard = (_id) => {
@@ -99,19 +90,6 @@ function App() {
       .finally(() => setIsLoading(false));
   };
 
-  // const onAddItem = (values) => {
-  //   setIsLoading(true);
-  //   postItems(values)
-  //     .then((res) => {
-  //       setClothingItems([res, ...clothingItems]);
-  //       handleCloseModal();
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     })
-  //     .finally(() => setIsLoading(false));
-  // };
-
   const onAddItem = (values) => {
     const jwt = localStorage.getItem("jwt");
     setIsLoading(true);
@@ -125,31 +103,6 @@ function App() {
       })
       .finally(() => setIsLoading(false));
   };
-
-  // const onSignUp = (user) => {
-  //   setIsLoading(true);
-  //   auth
-  //     .signUp(user)
-  //     .then((newUser) => {
-  //       setIsLoggedIn(true);
-  //       setCurrentUser(newUser.data);
-  //       handleCloseModal();
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
-  //function for handling any submit
-  // function handleSubmit(request) {
-  //   setIsLoading(true);
-  //   request()
-  //     .then(handleCloseModal)
-  //     .catch((err) => {
-  //       console.log(err);
-  //     })
-  //     .finally(() => setIsLoading(false));
-  // }
 
   function onSignUp(request) {
     setIsLoading(true);
@@ -213,8 +166,8 @@ function App() {
           setCurrentUser(data);
           setIsLoggedIn(true);
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((err) => {
+          console.log(err);
         });
     }
   }, [token]);
