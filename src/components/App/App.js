@@ -17,6 +17,8 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { Switch, Route } from "react-router-dom";
 import { getItems, postItems, deleteItems } from "../../utils/Api";
 import { signUp, signIn, checkToken } from "../../utils/auth";
+// import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+// import * as auth from "../../utils/auth";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -28,7 +30,9 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(localStorage.getItem("jwt") || "");
+
+  // const history = useHistory();
 
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -46,6 +50,11 @@ function App() {
     setActiveModal("");
   };
 
+  const handleAltModal = (alt) => {
+    handleCloseModal();
+    setActiveModal(alt);
+  };
+
   const handleSelectedCard = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
@@ -57,9 +66,26 @@ function App() {
       : setCurrentTemperatureUnit("F");
   };
 
+  // const handleDeleteCard = (_id) => {
+  //   setIsLoading(true);
+  //   deleteItems(_id)
+  //     .then(() => {
+  //       const updatedItems = clothingItems.filter((item) => {
+  //         return item._id !== _id;
+  //       });
+  //       setClothingItems(updatedItems);
+  //       handleCloseModal();
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     })
+  //     .finally(() => setIsLoading(false));
+  // };
+
   const handleDeleteCard = (_id) => {
+    const jwt = localStorage.getItem("jwt");
     setIsLoading(true);
-    deleteItems(_id)
+    deleteItems(_id, jwt)
       .then(() => {
         const updatedItems = clothingItems.filter((item) => {
           return item._id !== _id;
@@ -73,9 +99,23 @@ function App() {
       .finally(() => setIsLoading(false));
   };
 
+  // const onAddItem = (values) => {
+  //   setIsLoading(true);
+  //   postItems(values)
+  //     .then((res) => {
+  //       setClothingItems([res, ...clothingItems]);
+  //       handleCloseModal();
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     })
+  //     .finally(() => setIsLoading(false));
+  // };
+
   const onAddItem = (values) => {
+    const jwt = localStorage.getItem("jwt");
     setIsLoading(true);
-    postItems(values)
+    postItems(values, jwt)
       .then((res) => {
         setClothingItems([res, ...clothingItems]);
         handleCloseModal();
@@ -86,79 +126,55 @@ function App() {
       .finally(() => setIsLoading(false));
   };
 
-  //WIP
-  const onSignIn = (values) => {
-    setIsLoading(true);
-    signIn(values)
-      .then((res) => {
-        localStorage.setItem("jwt", res.token);
-        checkToken(res.token);
-        setIsLoggedIn(true);
-        handleCloseModal();
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => setIsLoading(false));
-  };
-
-  const onSignUp = (values) => {
-    setIsLoading(true);
-  };
-
-  // }
-  // function onLogin({ email, password }) {
+  // const onSignUp = (user) => {
   //   setIsLoading(true);
   //   auth
-  //     .authorization(email, password)
-  //     .then((res) => {
-  //       if (res) {
-  //         localStorage.setItem("jwt", res.token);
-  //         auth.checkToken(res.token).then((data) => {
-  //           setCurrentUser(data.data);
-  //           setIsLoggedIn(true);
-  //         });
-  //       }
+  //     .signUp(user)
+  //     .then((newUser) => {
+  //       setIsLoggedIn(true);
+  //       setCurrentUser(newUser.data);
   //       handleCloseModal();
   //     })
   //     .catch((err) => {
-  //       console.error("Login failed", err);
-  //     })
-  //     .finally(() => {
-  //       setIsLoading(false);
+  //       console.log(err);
   //     });
-  // }
+  // };
 
-  // function onSignup({ email, password, name, avatar }) {
+  //function for handling any submit
+  // function handleSubmit(request) {
   //   setIsLoading(true);
-  //   auth
-  //     .registration(email, password, name, avatar)
-  //     .then((res) => {
-  //       if (res) {
-  //         localStorage.setItem("jwt", res.token);
-  //         auth
-  //           .checkToken(res.token)
-  //           .then((data) => {
-  //             setCurrentUser(data);
-  //           })
-  //           .finally(() => {
-  //             setIsLoading(false);
-  //           })
-  //           .catch((err) => {
-  //             console.error(err);
-  //           });
-  //       }
-  //       handleLoginModal();
-  //     })
+  //   request()
+  //     .then(handleCloseModal)
   //     .catch((err) => {
-  //       console.error(err);
-  //     });
+  //       console.log(err);
+  //     })
+  //     .finally(() => setIsLoading(false));
   // }
 
-  // function handleAltModal(alt) {
-  //   handleCloseModal();
-  //   setActiveModal(alt);
-  // }
+  function onSignUp(request) {
+    setIsLoading(true);
+    signUp(request)
+      .then((res) => {
+        setIsLoggedIn(true);
+        setCurrentUser(res);
+      })
+      .then(handleCloseModal)
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
+  }
+
+  function onSignIn(request) {
+    setIsLoading(true);
+    signIn(request)
+      .then((res) => {
+        localStorage.setItem("jwt", res.token);
+        setToken(localStorage.getItem("jwt"));
+        setIsLoggedIn(true);
+      })
+      .then(handleCloseModal)
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
+  }
 
   useEffect(() => {
     getForecastWeather()
@@ -187,6 +203,7 @@ function App() {
     };
   }, [activeModal]);
 
+  //Check for token
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -204,7 +221,7 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={{ currentUser }}>
-      <div>
+      <div className="page">
         <CurrentTemperatureUnitContext.Provider
           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
         >
@@ -222,36 +239,35 @@ function App() {
                 weatherTemp={temp}
                 onSelectCard={handleSelectedCard}
                 clothingItems={clothingItems}
-                isLoggedIn={isLoggedIn}
+                // isLoggedIn={isLoggedIn}
               />
             </Route>
-
             <ProtectedRoute path="/profile" isLoggedIn={isLoggedIn}>
               <Profile
                 onSelectCard={handleSelectedCard}
                 clothingItems={clothingItems}
                 onCreate={handleCreateModal}
                 isLoggedIn={isLoggedIn}
+                onCreateModal={handleCreateModal}
+                onAltClick={handleAltModal}
               />
             </ProtectedRoute>
           </Switch>
           <Footer />
-
           {activeModal === "register" && (
             <RegisterModal
               isOpen={activeModal === "register"}
               buttonText={!isLoading ? "Sign in" : "Signing in..."}
               onSignUp={onSignUp}
               handleCloseModal={handleCloseModal}
-              // onAltClick={handleAltModal}
+              onAltClick={handleAltModal}
             />
           )}
-
           {activeModal === "login" && (
             <LoginModal
               handleCloseModal={handleCloseModal}
               onSignIn={onSignIn}
-              // onAltClick={handleAltModal}
+              onAltClick={handleAltModal}
               isOpen={activeModal === "login"}
               buttonText={!isLoading ? "Log in" : "Logging in..."}
             />
