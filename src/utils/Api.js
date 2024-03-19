@@ -38,7 +38,6 @@ export function postItems({ name, imageUrl, weather }) {
     headers: {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
-      // Accept: "application/json",
     },
     body: JSON.stringify({
       name: name,
@@ -49,10 +48,12 @@ export function postItems({ name, imageUrl, weather }) {
 }
 
 export function deleteItems(_id) {
+  const token = localStorage.getItem("jwt");
   return fetch(`${baseUrl}/items/${_id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
     },
   }).then(processServerResponse);
 }
