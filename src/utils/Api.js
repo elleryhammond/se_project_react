@@ -17,10 +17,14 @@ export function getItems() {
 }
 
 export function postItems(item) {
+  const token = localStorage.getItem("jwt");
+
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+      Accept: "application/json",
     },
     body: JSON.stringify(item),
   }).then(processServerResponse);
