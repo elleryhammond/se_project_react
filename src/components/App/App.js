@@ -91,11 +91,10 @@ function App() {
   };
 
   const onAddItem = (values) => {
-    const jwt = localStorage.getItem("jwt");
     setIsLoading(true);
-    postItems(values, jwt)
+    postItems(values)
       .then((res) => {
-        setClothingItems([res, ...clothingItems]);
+        setClothingItems([res.data, ...clothingItems]);
         handleCloseModal();
       })
       .catch((err) => {
@@ -103,6 +102,24 @@ function App() {
       })
       .finally(() => setIsLoading(false));
   };
+
+  // const onAddItem = ({ name, imageUrl, weather }) => {
+  //   const newItem = {
+  //     name,
+  //     imageUrl,
+  //     weather,
+  //   };
+  //   setIsLoading(true);
+  //   postItems(newItem)
+  //     .then((data) => {
+  //       setClothingItems([data, ...clothingItems]);
+  //       handleCloseModal();
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     })
+  //     .finally(() => setIsLoading(false));
+  // };
 
   function onSignUp(request) {
     setIsLoading(true);
