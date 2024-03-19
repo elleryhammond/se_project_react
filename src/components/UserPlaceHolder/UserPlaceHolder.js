@@ -1,8 +1,8 @@
 import React from "react";
 import "./UserPlaceHolder.css";
 
-const UserPlaceHolder = ({ userName }) => {
-  const firstInitial = userName ? userName[0].toUpperCase() : "";
+const UserPlaceHolder = ({ name }) => {
+  const firstInitial = name ? name[0].toUpperCase() : "";
 
   return (
     <div className="user__placeholder">
