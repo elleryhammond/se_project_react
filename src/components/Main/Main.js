@@ -7,35 +7,18 @@ import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperature
 
 function Main({ weatherTemp, onSelectCard, clothingItems }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
-  // const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 999;
-  // const tempF = currentTemperatureUnit === "F" ? temp : temp * 1.8 + 32;
+  const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 999;
+  const tempF = currentTemperatureUnit === "F" ? temp : temp * 1.8 + 32;
 
-  // const weatherType = useMemo(() => {
-  //   if (tempF >= 86) {
-  //     return "hot";
-  //   } else if (tempF >= 66 && tempF <= 85) {
-  //     return "warm";
-  //   } else if (tempF <= 65) {
-  //     return "cold";
-  //   }
-  // }, [weatherTemp]);
-
-  //Refactor to fix dev dependency issue
-  const temp = currentTemperatureUnit === "°C" ? weatherTemp.C : weatherTemp.F;
   const weatherType = useMemo(() => {
-    let hot = 80;
-    let warm = 66;
-
-    const tempF = weatherTemp.F;
-
-    if (tempF > hot) {
+    if (tempF >= 86) {
       return "hot";
-    } else if (tempF >= warm && tempF <= hot) {
+    } else if (tempF >= 66 && tempF <= 85) {
       return "warm";
-    } else if (tempF <= warm) {
+    } else if (tempF <= 65) {
       return "cold";
     }
-  }, [weatherTemp]);
+  }, [tempF]);
 
   const filteredCards = clothingItems.filter((item) => {
     return item.weather.toLowerCase() === weatherType;
