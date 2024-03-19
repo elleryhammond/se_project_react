@@ -73,13 +73,12 @@ function App() {
   //   history.pushState("/");
   // };
 
-  const handleDeleteCard = (_id) => {
-    const jwt = localStorage.getItem("jwt");
+  const handleDeleteCard = (id) => {
     setIsLoading(true);
-    deleteItems(_id, jwt)
+    deleteItems(id)
       .then(() => {
         const updatedItems = clothingItems.filter((item) => {
-          return item._id !== _id;
+          return item._id !== id;
         });
         setClothingItems(updatedItems);
         handleCloseModal();
@@ -90,9 +89,14 @@ function App() {
       .finally(() => setIsLoading(false));
   };
 
-  const onAddItem = (values) => {
+  const onAddItem = ({ name, imageUrl, weather }) => {
+    const newItem = {
+      name,
+      imageUrl,
+      weather,
+    };
     setIsLoading(true);
-    postItems(values)
+    postItems(newItem)
       .then((res) => {
         setClothingItems([res.data, ...clothingItems]);
         handleCloseModal();
@@ -102,24 +106,6 @@ function App() {
       })
       .finally(() => setIsLoading(false));
   };
-
-  // const onAddItem = ({ name, imageUrl, weather }) => {
-  //   const newItem = {
-  //     name,
-  //     imageUrl,
-  //     weather,
-  //   };
-  //   setIsLoading(true);
-  //   postItems(newItem)
-  //     .then((data) => {
-  //       setClothingItems([data, ...clothingItems]);
-  //       handleCloseModal();
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     })
-  //     .finally(() => setIsLoading(false));
-  // };
 
   function onSignUp(request) {
     setIsLoading(true);
@@ -155,8 +141,8 @@ function App() {
       })
       .catch((err) => console.log(err));
     getItems()
-      // .then((data) => setClothingItems(data))
-      .then((data) => setClothingItems(data.clothingItems))
+      .then((data) => setClothingItems(data.data))
+      // .then((data) => setClothingItems(data.clothingItems))
       .catch((err) => console.log(err));
   }, []);
 
