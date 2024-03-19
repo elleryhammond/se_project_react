@@ -163,7 +163,7 @@ function App() {
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      setToken(jwt);
+      // setToken(jwt);
       checkToken(jwt)
         .then((data) => {
           setCurrentUser(data);
