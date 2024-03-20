@@ -96,8 +96,8 @@ const RegisterModal = ({ handleCloseModal, onSignUp, onAltClick, isOpen }) => {
           // id="link"
           placeholder="Avatar URL"
           value={link}
-          required
           onChange={handleUrlChange}
+          required
         />
       </label>
     </ModalWithForm>
