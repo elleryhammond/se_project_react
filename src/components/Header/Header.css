@@ -2,8 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 60px;
   padding: 32px 40px 32px 40px;
+
+  min-height: 60px;
   color: #000;
   font-family: "CabinetGrotesk-Medium", Arial, sans-serif;
   font-style: normal;
@@ -13,10 +14,11 @@
 }
 
 .header__logo {
-  height: 90px;
   display: flex;
   gap: 24px;
   align-items: center;
+
+  height: 90px;
 }
 
 .header__container {
@@ -25,7 +27,7 @@
   align-items: center;
 }
 
-.header__clothes-button {
+.header__button {
   border: none;
   background: none;
   color: #000;
@@ -34,8 +36,9 @@
   font-weight: 700;
   line-height: 24px;
   font-size: 20px;
-  padding: 0;
   cursor: pointer;
+
+  padding: 0;
 }
 
 .header__clothes-button:hover {
@@ -51,10 +54,10 @@
   cursor: pointer;
   text-decoration: none;
 
-  /* display: flex; */
-  /* align-items: center; */
-  /* gap: 20px; */
-  /* color: #000; */
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: #000;
 }
 
 .header__username:visited {
@@ -72,7 +75,7 @@ a {
   text-decoration: none;
 }
 
-.header__button {
+/* .header__button {
   border: none;
   background: none;
   color: #000;
@@ -83,7 +86,7 @@ a {
   font-size: 20px;
   padding: 0;
   cursor: pointer;
-}
+} */
 
 .header__button:visited {
   color: #000;
@@ -94,20 +97,24 @@ a {
 }
 
 .header__avatar {
-  width: 40px;
-  height: 40px;
   justify-content: center;
-  align-items: center;
+
   display: flex;
   font-size: 20px;
   font-family: "CabinetGrotesk-Medium", Arial, sans-serif;
   color: #ffffff;
   background-color: rgba(0, 0, 0, 0.5);
   border: 1px solid #000000;
+
   border-radius: 50%;
+  display: flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  object-fit: cover;
 }
 
-.header__user-img-text {
+.header__user-image-text {
   height: 40px;
   width: 40px;
   object-fit: cover;
