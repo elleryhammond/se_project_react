@@ -1,13 +1,13 @@
 import { baseUrl } from "../utils/Api";
 import { processServerResponse } from "../utils/Api";
 
-export const signUp = ({ name, avatar, email, password }) => {
+export const signUp = ({ email, password, name, avatar }) => {
   return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ name, avatar, email, password }),
+    body: JSON.stringify({ email, password, name, avatar }),
   }).then(processServerResponse);
 };
 
