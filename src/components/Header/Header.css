@@ -50,6 +50,11 @@
   font-size: 20px;
   cursor: pointer;
   text-decoration: none;
+
+  /* display: flex; */
+  /* align-items: center; */
+  /* gap: 20px; */
+  /* color: #000; */
 }
 
 .header__username:visited {
@@ -58,6 +63,13 @@
 
 .header__username:hover {
   color: darkgrey;
+}
+
+a {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  text-decoration: none;
 }
 
 .header__button {
@@ -81,8 +93,28 @@
   color: darkgrey;
 }
 
-.header__avatar-login {
+.header__avatar {
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: 20px;
+  font-family: "CabinetGrotesk-Medium", Arial, sans-serif;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid #000000;
+  border-radius: 50%;
 }
 
-login__button {
+.header__user-img-text {
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  font-family: "CabinetGrotesk-Medium", Arial, sans-serif;
 }
