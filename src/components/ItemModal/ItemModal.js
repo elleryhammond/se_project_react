@@ -3,9 +3,9 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useContext } from "react";
 
 const ItemModal = ({ selectedCard, onClose, onDelete }) => {
-  const currentUser = useContext(CurrentUserContext);
-  console.log(currentUser);
-  const isOwn = selectedCard.owner === currentUser._id;
+  const { currentUser } = useContext(CurrentUserContext);
+
+  const isOwn = selectedCard.owner === currentUser?._id;
 
   const itemDeleteButtonClassName = `modal__item-delete-button ${
     isOwn
