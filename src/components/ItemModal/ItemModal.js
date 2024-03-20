@@ -1,9 +1,21 @@
 import "./ItemModal.css";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { useContext } from "react";
 
 const ItemModal = ({ selectedCard, onClose, onDelete }) => {
+  console.log(selectedCard);
+  const currentUser = useContext(CurrentUserContext);
+  console.log(currentUser);
+  const isOwn = selectedCard.owner === currentUser._id;
+
+  const itemDeleteButtonClassName = `modal__item-delete-button ${
+    isOwn ? "" : "modal__item-delete-button_hidden"
+  }`;
+
   const handleDelete = () => {
     onDelete(selectedCard._id);
   };
+
   return (
     <div className={`modal`}>
       <div className="modal__content">
@@ -20,7 +32,7 @@ const ItemModal = ({ selectedCard, onClose, onDelete }) => {
           </div>
           <button
             type="button"
-            className="modal__item-delete-button"
+            className={itemDeleteButtonClassName}
             onClick={handleDelete}
           >
             Delete Item
