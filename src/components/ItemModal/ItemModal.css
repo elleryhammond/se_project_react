@@ -80,20 +80,10 @@
 }
 
 .modal__item-delete-button_hidden {
-  display: none;
+  /* display: none; */
+  visibility: hidden;
 }
 
-/* .modal__item-delete-button_visible {
-  border: none;
-  color: #ff4d00;
-  background-color: #fff;
-  font-family: "CabinetGrotesk-Medium", Arial, sans-serif;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 24px;
-  padding: 0;
-  max-height: 24px;
-  margin-right: 32px;
-  margin-top: 20px;
-} */
+.modal__item-delete-button_visible {
+  visibility: visible;
+}
