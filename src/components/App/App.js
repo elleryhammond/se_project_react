@@ -17,7 +17,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { Switch, Route } from "react-router-dom";
 import { getItems, postItems, deleteItems } from "../../utils/Api";
 import { signUp, signIn, checkToken } from "../../utils/auth";
-// import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
 // import * as auth from "../../utils/auth";
 
 function App() {
@@ -31,8 +31,6 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("jwt") || "");
-
-  // const history = useHistory();
 
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -54,6 +52,10 @@ function App() {
     handleCloseModal();
     setActiveModal(alt);
   };
+
+  // const handleEditProfileModal = () => {
+  //   setActiveModal("edit");
+  // };
 
   const handleSelectedCard = (card) => {
     setActiveModal("preview");
@@ -107,14 +109,25 @@ function App() {
       .finally(() => setIsLoading(false));
   };
 
+  // function onSignUp(request) {
+  //   setIsLoading(true);
+  //   signUp(request)
+  //     .then((res) => {
+  //       setIsLoggedIn(true);
+  //       setCurrentUser(res);
+  //     })
+  //     .then(handleCloseModal)
+  //     .catch((err) => console.log(err))
+  //     .finally(() => setIsLoading(false));
+  // }
+
   function onSignUp(request) {
     setIsLoading(true);
     signUp(request)
-      .then((res) => {
-        setIsLoggedIn(true);
-        setCurrentUser(res);
+      .then(() => {
+        handleCloseModal();
+        onSignIn(request);
       })
-      .then(handleCloseModal)
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false));
   }
@@ -159,14 +172,14 @@ function App() {
     };
   }, [activeModal]);
 
-  //Check for token
+  // Check for token
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       // setToken(jwt);
       checkToken(jwt)
         .then((data) => {
-          setCurrentUser(data);
+          setCurrentUser(data.data);
           setIsLoggedIn(true);
         })
         .catch((err) => {
@@ -195,7 +208,7 @@ function App() {
                 weatherTemp={temp}
                 onSelectCard={handleSelectedCard}
                 clothingItems={clothingItems}
-                // isLoggedIn={isLoggedIn}
+                isLoggedIn={isLoggedIn}
               />
             </Route>
             <ProtectedRoute path="/profile" isLoggedIn={isLoggedIn}>
