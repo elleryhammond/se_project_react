@@ -16,20 +16,6 @@ export function getItems() {
   }).then(processServerResponse);
 }
 
-// export function postItems(item) {
-//   const token = localStorage.getItem("jwt");
-
-//   return fetch(`${baseUrl}/items`, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       authorization: `Bearer ${token}`,
-//       Accept: "application/json",
-//     },
-//     body: JSON.stringify(item),
-//   }).then(processServerResponse);
-// }
-
 export function postItems({ name, imageUrl, weather }) {
   const token = localStorage.getItem("jwt");
 
@@ -57,14 +43,3 @@ export function deleteItems(_id) {
     },
   }).then(processServerResponse);
 }
-
-// export function deleteItems(selectedCard) {
-//   const token = localStorage.getItem("jwt");
-//   return fetch(`${baseUrl}/items/${selectedCard._id}`, {
-//     method: "DELETE",
-//     headers: {
-//       "Content-Type": "application/json",
-//       authorization: `Bearer ${token}`,
-//     },
-//   }).then(processServerResponse);
-// }
