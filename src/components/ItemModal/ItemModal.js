@@ -3,7 +3,6 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useContext } from "react";
 
 const ItemModal = ({ selectedCard, onClose, onDelete }) => {
-  console.log(selectedCard);
   const currentUser = useContext(CurrentUserContext);
   console.log(currentUser);
   const isOwn = selectedCard.owner === currentUser._id;
