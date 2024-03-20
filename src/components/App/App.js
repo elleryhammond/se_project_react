@@ -9,6 +9,7 @@ import ItemModal from "../ItemModal/ItemModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
 import { useState, useEffect } from "react";
 import { getForecastWeather, parseWeatherData } from "../../utils/weatherApi";
@@ -16,7 +17,7 @@ import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperature
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { Switch, Route } from "react-router-dom";
 import { getItems, postItems, deleteItems } from "../../utils/Api";
-import { signUp, signIn, checkToken } from "../../utils/auth";
+import { signUp, signIn, checkToken, editProfile } from "../../utils/auth";
 
 // import * as auth from "../../utils/auth";
 
@@ -53,9 +54,9 @@ function App() {
     setActiveModal(alt);
   };
 
-  // const handleEditProfileModal = () => {
-  //   setActiveModal("edit");
-  // };
+  const handleEditProfileModal = () => {
+    setActiveModal("edit");
+  };
 
   const handleSelectedCard = (card) => {
     setActiveModal("preview");
@@ -91,6 +92,15 @@ function App() {
       .finally(() => setIsLoading(false));
   };
 
+  const handleEditProfile = (name, avatar, token) => {
+    editProfile(name, avatar, token)
+      .then((data) => {
+        setCurrentUser(data.data);
+        handleCloseModal();
+      })
+      .catch(console.error);
+  };
+
   const onAddItem = ({ name, imageUrl, weather }) => {
     const newItem = {
       name,
@@ -108,18 +118,6 @@ function App() {
       })
       .finally(() => setIsLoading(false));
   };
-
-  // function onSignUp(request) {
-  //   setIsLoading(true);
-  //   signUp(request)
-  //     .then((res) => {
-  //       setIsLoggedIn(true);
-  //       setCurrentUser(res);
-  //     })
-  //     .then(handleCloseModal)
-  //     .catch((err) => console.log(err))
-  //     .finally(() => setIsLoading(false));
-  // }
 
   function onSignUp(request) {
     setIsLoading(true);
@@ -219,6 +217,7 @@ function App() {
                 isLoggedIn={isLoggedIn}
                 onCreateModal={handleCreateModal}
                 onAltClick={handleAltModal}
+                onEditProfile={handleEditProfileModal}
               />
             </ProtectedRoute>
           </Switch>
@@ -256,6 +255,15 @@ function App() {
               onClose={handleCloseModal}
               onDelete={handleDeleteCard}
               buttonText={!isLoading ? "Delete Item" : "Deleting..."}
+            />
+          )}
+          {activeModal === "edit" && (
+            <EditProfileModal
+              handleCloseModal={handleCloseModal}
+              onClose={handleCloseModal}
+              isOpen={activeModal === "edit"}
+              onSubmit={handleEditProfile}
+              buttonText={!isLoading ? "Edit Profile" : "Editing..."}
             />
           )}
         </CurrentTemperatureUnitContext.Provider>
