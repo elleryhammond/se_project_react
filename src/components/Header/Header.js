@@ -11,7 +11,7 @@ const Header = ({ onCreateModal, city, onSignUp, onLogin, isLoggedIn }) => {
     day: "numeric",
   });
 
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
 
   return (
     <header className="header">
@@ -31,7 +31,7 @@ const Header = ({ onCreateModal, city, onSignUp, onLogin, isLoggedIn }) => {
         {isLoggedIn ? (
           <div>
             <button
-              className="header__clothes-button"
+              className="header__button"
               type="button"
               onClick={onCreateModal}
             >
@@ -45,9 +45,9 @@ const Header = ({ onCreateModal, city, onSignUp, onLogin, isLoggedIn }) => {
         )}
         {isLoggedIn ? (
           <Link to="/profile">
-            <h2 className="header__username">{currentUser?.name}</h2>
+            <div className="header__username">{currentUser?.name}</div>
             {currentUser?.avatar === "" ? (
-              <div className="header__user-img-text">
+              <div className="header__user-image-text">
                 {currentUser?.name[0]}
               </div>
             ) : (
@@ -55,7 +55,7 @@ const Header = ({ onCreateModal, city, onSignUp, onLogin, isLoggedIn }) => {
                 <img
                   src={currentUser?.avatar}
                   alt="avatar logo"
-                  className="header__user-image"
+                  className="header__avatar"
                 />
               </div>
             )}
