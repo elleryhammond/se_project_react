@@ -57,3 +57,14 @@ export function deleteItems(_id) {
     },
   }).then(processServerResponse);
 }
+
+// export function deleteItems(selectedCard) {
+//   const token = localStorage.getItem("jwt");
+//   return fetch(`${baseUrl}/items/${selectedCard._id}`, {
+//     method: "DELETE",
+//     headers: {
+//       "Content-Type": "application/json",
+//       authorization: `Bearer ${token}`,
+//     },
+//   }).then(processServerResponse);
+// }
