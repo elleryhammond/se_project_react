@@ -36,11 +36,12 @@
   font-weight: 700;
   display: inline;
   margin-left: 30px;
+  color: darkgray;
 }
 
 .clothes__add-button:hover {
   cursor: pointer;
-  color: darkgrey;
+  color: lightgrey;
 }
 
 .clothes__section-cards {
