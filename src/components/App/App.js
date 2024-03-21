@@ -37,6 +37,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("jwt") || "");
+  // eslint-disable-next-line
   const [isLiked, setIsLiked] = useState(false);
 
   const handleCreateModal = () => {
@@ -180,7 +181,6 @@ function App() {
       .catch((err) => console.log(err));
     getItems()
       .then((data) => setClothingItems(data.data))
-      // .then((data) => setClothingItems(data.clothingItems))
       .catch((err) => console.log(err));
   }, []);
 
