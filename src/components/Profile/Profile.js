@@ -11,6 +11,7 @@ const Profile = ({
   onEditProfile,
   currentUser,
   onLogOut,
+  handleCardLike,
 }) => {
   return (
     <div className="profile">
@@ -24,6 +25,7 @@ const Profile = ({
         onSelectCard={onSelectCard}
         onCreate={onCreate}
         isLoggedIn={isLoggedIn}
+        handleCardLike={handleCardLike}
       />
     </div>
   );
