@@ -19,8 +19,6 @@ import { Switch, Route } from "react-router-dom";
 import { getItems, postItems, deleteItems } from "../../utils/Api";
 import { signUp, signIn, checkToken, editProfile } from "../../utils/auth";
 
-// import * as auth from "../../utils/auth";
-
 function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
@@ -69,12 +67,11 @@ function App() {
       : setCurrentTemperatureUnit("F");
   };
 
-  // const handleSignOut = () => {
-  //   localStorage.removeItem("jwt");
-  //   setCurrentUser({});
-  //   setIsLoggedIn(false);
-  //   history.pushState("/");
-  // };
+  const handleLogOut = () => {
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
+    setClothingItems(clothingItems);
+  };
 
   const handleDeleteCard = (id) => {
     setIsLoading(true);
@@ -218,6 +215,7 @@ function App() {
                 onCreateModal={handleCreateModal}
                 onAltClick={handleAltModal}
                 onEditProfile={handleEditProfileModal}
+                onLogOut={handleLogOut}
               />
             </ProtectedRoute>
           </Switch>
