@@ -17,7 +17,14 @@ import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperature
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { Switch, Route } from "react-router-dom";
 import { getItems, postItems, deleteItems } from "../../utils/Api";
-import { signUp, signIn, checkToken, editProfile } from "../../utils/auth";
+import {
+  signUp,
+  signIn,
+  checkToken,
+  editProfile,
+  addCardLike,
+  removeCardLike,
+} from "../../utils/auth";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -30,6 +37,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("jwt") || "");
+  const [isLiked, setIsLiked] = useState(false);
 
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -96,6 +104,28 @@ function App() {
         handleCloseModal();
       })
       .catch(console.error);
+  };
+
+  const handleCardLike = (id, isLiked) => {
+    if (isLiked) {
+      removeCardLike(id, token)
+        .then((updatedCard) => {
+          setClothingItems((cards) =>
+            cards.map((c) => (c._id === id ? updatedCard : c))
+          );
+          setIsLiked(false);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      addCardLike(id, token)
+        .then((updatedCard) => {
+          setClothingItems((cards) =>
+            cards.map((c) => (c._id === id ? updatedCard : c))
+          );
+          setIsLiked(true);
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   const onAddItem = ({ name, imageUrl, weather }) => {
@@ -167,11 +197,9 @@ function App() {
     };
   }, [activeModal]);
 
-  // Check for token
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      // setToken(jwt);
       checkToken(jwt)
         .then((data) => {
           setCurrentUser(data.data);
@@ -204,6 +232,7 @@ function App() {
                 onSelectCard={handleSelectedCard}
                 clothingItems={clothingItems}
                 isLoggedIn={isLoggedIn}
+                handleCardLike={handleCardLike}
               />
             </Route>
             <ProtectedRoute path="/profile" isLoggedIn={isLoggedIn}>
@@ -216,6 +245,7 @@ function App() {
                 onAltClick={handleAltModal}
                 onEditProfile={handleEditProfileModal}
                 onLogOut={handleLogOut}
+                handleCardLike={handleCardLike}
               />
             </ProtectedRoute>
           </Switch>
