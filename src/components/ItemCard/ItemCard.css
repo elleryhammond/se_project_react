@@ -55,14 +55,14 @@
 .card__like-button {
   background-image: url("../../images/likebutton-inactive.svg");
   width: 20px;
-  height: 20px;
+  height: 18px;
   cursor: pointer;
-  background: no-repeat;
   border: none;
-  background-color: #fff;
-  background-repeat: no-repeat;
+  background-color: #ffffff;
+  overflow: hidden;
+  background-color: transparent;
 }
 
 .card__like-button_active {
-  background-image: url(../../images/likebutton-active.svg);
+  background-image: url("../../images/likebutton-active.svg");
 }
