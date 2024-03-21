@@ -1,6 +1,33 @@
+.card__element {
+  position: relative;
+  width: 328px;
+  height: 328px;
+  display: flex;
+  flex-direction: column;
+  top: 20px;
+  align-items: center;
+}
+
+.card__info {
+  position: absolute;
+  display: flex;
+  top: 20px;
+  align-items: center;
+  gap: 10px;
+  padding: 2px 6px 2px 8px;
+  border-radius: 4px;
+}
+
+.card__container {
+  display: flex;
+  margin: 0;
+  align-items: center;
+  padding: 2px 6px 2px 8px;
+  border-radius: 4px;
+  background: #ffffff;
+}
+
 .card__image {
-  max-width: 328px;
-  /* width: 100%; */
   width: 328px;
   height: 328px;
   border-radius: 20px;
@@ -17,25 +44,25 @@
   text-align: center;
   margin: 0 auto;
   position: relative;
-  top: 40px;
+  top: 1px;
   color: rgba(0, 0, 0, 0.6);
   background-color: rgba(255, 255, 255, 1);
-  border-radius: 4px;
+  border-radius: 5px;
   padding: 2px 12px;
   width: fit-content;
 }
 
-.card__section {
-  margin-top: 20px;
-  margin-left: 20px;
-  font-family: "CabinetGrotesk-Medium";
+.card__like-button {
+  background-image: url("../../images/likebutton-inactive.svg");
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  background: no-repeat;
+  border: none;
+  background-color: #fff;
+  background-repeat: no-repeat;
 }
 
-.card__items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: flex-start;
-  margin-top: 20px;
-  row-gap: 0px;
+.card__like-button_active {
+  background-image: url(../../images/likebutton-active.svg);
 }
