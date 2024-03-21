@@ -10,10 +10,15 @@ const Profile = ({
   isLoggedIn,
   onEditProfile,
   currentUser,
+  onLogOut,
 }) => {
   return (
     <div className="profile">
-      <SideBar onEditProfile={onEditProfile} currentUser={currentUser} />
+      <SideBar
+        onEditProfile={onEditProfile}
+        currentUser={currentUser}
+        onLogOut={onLogOut}
+      />
       <ClothesSection
         clothingItems={clothingItems}
         onSelectCard={onSelectCard}
