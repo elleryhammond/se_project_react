@@ -2,7 +2,7 @@
 
 export const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "https://wtwrapp.twilightparadox.com"
+    ? "https://api.wtwrapp.twilightparadox.com"
     : "http://localhost:3001";
 
 export const processServerResponse = (res) => {
